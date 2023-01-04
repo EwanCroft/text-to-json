@@ -6,13 +6,8 @@ root = os.path.dirname(os.path.realpath(__file__))
 
 def clean_input(input_str):
     if "\\" not in input_str or ":" not in input_str:
-        # Lowercase the input string
         input_str = input_str.lower()
-
-        # Remove quotes
         input_str = input_str.replace('"', '')
-
-        # Remove punctuation
         translator = str.maketrans('', '', string.punctuation)
         input_str = input_str.translate(translator)
 
