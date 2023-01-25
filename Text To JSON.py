@@ -16,24 +16,27 @@ def clean_input(input_str):
 user_input = input("Type in the path to the file that you want to sort:\n")
 user_input = clean_input(user_input).strip('"')
 
-with open(f"{user_input}", "r") as f:
-    lines = f.read().splitlines()
+if os.path.exists(user_input):
+    with open(f"{user_input}", "r") as f:
+        lines = f.read().splitlines()
 
-words = [word for line in lines for word in line.split()]
-words = [clean_input(word) for word in words]
-words = sorted(words, key=str.lower)
+        words = [word for line in lines for word in line.split()]
+        words = [clean_input(word) for word in words]
+        words = sorted(words, key=str.lower)
 
-sorted_words = {}
-for word in words:
-    if word.isdigit():
-        if "numbers" not in sorted_words:
-            sorted_words["numbers"] = []
-        sorted_words["numbers"].append(word)
-    else:
-        initial = word[0].lower()
-        if initial not in sorted_words:
-            sorted_words[initial] = []
-        sorted_words[initial].append(word)
+        sorted_words = {}
+        for word in words:
+            if word.isdigit():
+                if "numbers" not in sorted_words:
+                    sorted_words["numbers"] = []
+                sorted_words["numbers"].append(word)
+            else:
+                initial = word[0].lower()
+                if initial not in sorted_words:
+                    sorted_words[initial] = []
+                sorted_words[initial].append(word)
 
-with open(f"{root}\\sorted_words.json", "w") as f:
-    json.dump(sorted_words, f, indent = 2)
+        with open(f"{root}\\sorted_words.json", "w") as f:
+            json.dump(sorted_words, f, indent = 4)
+else:
+    print("file not found")
