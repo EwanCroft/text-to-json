@@ -1,4 +1,4 @@
-# To JSON
+# Text To JSON
 
 ## This is a Python script that converts any text file to JSON.
 
