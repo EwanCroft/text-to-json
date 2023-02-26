@@ -3,6 +3,7 @@ import os
 import string
 
 root = os.path.dirname(os.path.realpath(__file__))
+sorted_words_file = rf"{root}\sorted_words.json"
 
 def clean_input(input_str):
     if "\\" not in input_str or ":" not in input_str:
@@ -36,7 +37,9 @@ if os.path.exists(user_input):
                     sorted_words[initial] = []
                 sorted_words[initial].append(word)
 
-        with open(f"{root}\\sorted_words.json", "w") as f:
+        with open(sorted_words_file, "w") as f:
             json.dump(sorted_words, f, indent = 4)
+        
+        print(f"Sorted! you can find it at {sorted_words_file}")
 else:
     print("file not found")
